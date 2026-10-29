@@ -1,0 +1,26 @@
+directories:
+  output: dist
+  buildResources: build
+appId: ru.student.handbook
+productName: Электронный справочник Первокурсника
+files:
+  - filter:
+      - index.html
+      - styles.css
+      - data.js
+      - app.js
+      - electron-main.cjs
+      - package.json
+win:
+  target:
+    - nsis
+    - portable
+nsis:
+  artifactName: ${productName}-Setup-${version}-${arch}.${ext}
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+portable:
+  artifactName: ${productName}-Portable-${version}-${arch}.${ext}
+electronVersion: 39.8.10

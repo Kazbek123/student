@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f2">
+  <title>Первый курс — электронный справочник</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#home" aria-label="На главную">
+        <span class="brand-mark">П<span>1</span></span>
+        <span class="brand-text">первый курс<small>справочник студента</small></span>
+      </a>
+      <div class="side-label">НАВИГАЦИЯ</div>
+      <nav class="nav" aria-label="Основная навигация">
+        <button class="nav-item active" data-view="home"><span>⌂</span>Главная</button>
+        <button class="nav-item" data-view="sections"><span>▦</span>Разделы справочника</button>
+        <button class="nav-item" data-view="saved"><span>☆</span>Избранное <b id="saved-count">0</b></button>
+        <button class="nav-item" data-view="tasks"><span>☷</span>Мои дела <b id="task-count">0</b></button>
+        <button class="nav-item" data-view="contacts"><span>⌖</span>Контакты</button>
+        <button class="nav-item" data-view="settings"><span>⚙</span>Настройки</button>
+      </nav>
+      <div class="sidebar-note"><span class="note-icon">✳</span><p>Начни с главного.<br><strong>Остальное найдётся.</strong></p></div>
+      <div class="side-footer">ЭЛЕКТРОННЫЙ СПРАВОЧНИК<br><span>Версия 1.0 · учебный проект</span></div>
+    </aside>
+
+    <main class="main" id="home">
+      <header class="topbar"><div class="breadcrumb">МОЁ ПРОСТРАНСТВО <span>/</span> ПЕРВЫЙ КУРС</div><div class="top-right"><span class="status-dot"></span> Справочник всегда под рукой</div></header>
+      <section class="welcome-panel">
+        <div class="welcome-copy"><div class="welcome-label"><span class="welcome-spark">✦</span> ТВОЯ СТУДЕНЧЕСКАЯ ПАНЕЛЬ</div>
+          <h1>Привет, студент! <span>👋</span></h1>
+          <p>Учёба, полезные контакты и важные дела — собрали всё, чтобы тебе было проще освоиться.</p>
+          <div class="quick-actions"><button class="quick-button primary" data-action="add-task"><span class="quick-icon">＋</span><span>Добавить дело</span></button><button class="quick-button" data-action="focus-search"><span class="quick-icon">⌕</span><span>Найти ответ</span></button><button class="quick-button" data-view="contacts"><span class="quick-icon">♧</span><span>Мои контакты</span></button><a class="quick-button portal-button" href="https://college.smartnation.kz/ru/mng/login" target="_blank" rel="noreferrer"><span class="quick-icon">↗</span><span>Портал SmartNation</span></a></div>
+        </div>
+        <div class="welcome-sticker" aria-hidden="true"><div class="sticker-star">✦</div><strong>У тебя<br>всё получится</strong><span>НАЧИНАЙ С МАЛЕНЬКОГО</span></div>
+      </section>
+
+      <section class="dashboard-widgets" aria-label="Твоя сводка"><button class="widget-card widget-tasks" data-view="tasks"><span class="widget-icon">☑</span><span class="widget-copy"><strong>Мои дела</strong><small id="today-summary">Добавь первое дело</small></span><b class="widget-value" id="widget-task-count">0</b><span class="widget-arrow">↗</span></button><button class="widget-card widget-favorites" data-view="saved"><span class="widget-icon">★</span><span class="widget-copy"><strong>Избранное</strong><small>Полезное под рукой</small></span><b class="widget-value" id="widget-saved-count">0</b><span class="widget-arrow">↗</span></button><a class="widget-card widget-college" href="https://college.smartnation.kz/ru/mng/login" target="_blank" rel="noreferrer"><span class="widget-icon">⌂</span><span class="widget-copy"><strong>Портал колледжа</strong><small>SmartNation · вход</small></span><span class="widget-arrow">↗</span></a></section>
+
+      <section class="search-wrap" aria-label="Поиск по справочнику"><div class="search-icon">⌕</div><input id="search" type="search" placeholder="Спроси что угодно: расписание, справки, стипендия…" autocomplete="off"><kbd>ENTER</kbd></section>
+
+      <section class="content-section" id="explore">
+        <div class="section-heading"><div><div class="eyebrow muted">СПРАВОЧНИК</div><h2>Что тебе нужно?</h2></div><button class="text-link" data-view="sections">Все разделы <span>↗</span></button></div>
+        <div class="category-grid" id="categories"></div>
+      </section>
+
+      <section class="content-section results-section" id="results-section" hidden><div class="section-heading"><div><div class="eyebrow muted">РЕЗУЛЬТАТЫ ПОИСКА</div><h2 id="results-title">Нашли для тебя</h2></div><button class="text-link" id="clear-search">Сбросить <span>×</span></button></div><div class="article-grid" id="results"></div></section>
+      <section class="content-section articles-section" id="articles-section"><div class="section-heading"><div><div class="eyebrow muted">СОВЕТЫ И ПОДСКАЗКИ</div><h2>Популярное у студентов</h2></div><span class="micro-label">СОХРАНИ В ИЗБРАННОЕ</span></div><div class="article-grid" id="featured"></div></section>
+      <section class="content-section extra-view" id="tasks-view" hidden><div class="section-heading"><div><div class="eyebrow muted">ЛИЧНЫЙ ПЛАН</div><h2>Мои дела</h2></div><span class="micro-label">СОХРАНЯЕТСЯ НА ЭТОМ УСТРОЙСТВЕ</span></div><form class="task-form" id="task-form"><input id="task-input" maxlength="120" placeholder="Например, узнать расписание у куратора" required><input id="task-date" type="date" aria-label="Срок"><button class="button dark">Добавить <span>+</span></button></form><div class="task-list" id="task-list"></div></section>
+      <section class="content-section extra-view" id="contacts-view" hidden><div class="section-heading"><div><div class="eyebrow muted">ЗАПОЛНИ ПОД СВОЙ КОЛЛЕДЖ</div><h2>Полезные контакты</h2></div><button class="button dark" id="add-contact">＋ Добавить контакт</button></div><p class="view-hint">Начни с куратора, учебной части и библиотеки. Контакты хранятся только в локальном браузере.</p><form class="contact-form" id="contact-form" hidden><input name="role" placeholder="Кто это? Например, куратор" required maxlength="60"><input name="name" placeholder="Имя или название службы" required maxlength="100"><input name="phone" placeholder="Телефон" maxlength="40"><input name="place" placeholder="Кабинет или адрес" maxlength="100"><input name="note" placeholder="Примечание" maxlength="180"><button class="button dark">Сохранить контакт</button><button class="button light" type="button" id="cancel-contact">Отмена</button></form><div class="contact-grid" id="contact-list"></div></section>
+      <section class="content-section extra-view" id="settings-view" hidden><div class="section-heading"><div><div class="eyebrow muted">ЛИЧНЫЕ НАСТРОЙКИ</div><h2>Мой справочник</h2></div></div><div class="settings-card"><div><strong>Портал колледжа · SmartNation</strong><p>Вход в личный кабинет. Расписание и персональные сведения доступны после авторизации на портале.</p></div><a class="button dark" href="https://college.smartnation.kz/ru/mng/login" target="_blank" rel="noreferrer">Открыть портал ↗</a></div><div class="settings-card"><div><strong>Резервная копия</strong><p>Сохрани материалы, задачи и контакты в файл или восстанови их из копии.</p></div><div class="settings-actions"><button class="button dark" id="export-data">Скачать копию <span>↓</span></button><label class="button light">Загрузить копию <span>↑</span><input id="import-data" type="file" accept="application/json" hidden></label></div></div><div class="settings-card"><div><strong>Образовательная организация</strong><p id="college-description">Укажи название колледжа, чтобы персонализировать справочник.</p></div><button class="text-link" id="edit-college">Изменить <span>↗</span></button></div><div class="settings-card danger-card"><div><strong>Очистить локальные данные</strong><p>Удалит избранное, задачи и контакты с этого устройства.</p></div><button class="text-link danger" id="clear-data">Очистить данные <span>×</span></button></div></section>
+      <footer class="footer"><span>ПЕРВЫЙ КУРС <b>✳</b> ВСЁ НАЧИНАЕТСЯ С ТЕБЯ</span><span>ДАННЫЕ НУЖНО СВЕРЯТЬ С ОФИЦИАЛЬНЫМИ ДОКУМЕНТАМИ КОЛЛЕДЖА</span></footer>
+    </main>
+    <aside class="right-rail"><div class="rail-top"><span>ТВОЯ УЧЁБА</span><span class="rail-mark">✳</span></div><div class="rail-message"><span class="rail-number">01 / 03</span><h3>Не бойся<br>спрашивать.</h3><p>Куратор и учебная часть помогут разобраться, если что-то непонятно.</p><span class="rail-line"></span><span class="rail-small">НАЧИНАТЬ — ЭТО НОРМАЛЬНО</span></div><div class="rail-bottom"><span class="quote-mark">“</span><p>Большие перемены<br>начинаются с маленьких<br>шагов.</p><span>— ТВОЙ СПРАВОЧНИК</span></div></aside>
+  </div>
+  <div class="modal" id="article-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden><div class="modal-backdrop" data-close></div><article class="modal-card"><button class="modal-close" data-close aria-label="Закрыть">×</button><div class="eyebrow muted" id="modal-category"></div><h2 id="modal-title"></h2><div class="modal-body" id="modal-body"></div><div class="modal-footer"><span>ЭЛЕКТРОННЫЙ СПРАВОЧНИК · ПЕРВЫЙ КУРС</span><button class="save-button" id="modal-save">☆ В избранное</button></div></article></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
